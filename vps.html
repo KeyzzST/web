@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VPS/RDP DigitalOcean - KyzzCloud</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>KyzzCloud</h1>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <nav id="navMenu">
+
+            <a href="index.html">Beranda</a>
+
+            <a href="hostingmc.html">Panel Bot</a>
+
+            <a href="vps.html">VPS</a>
+
+            <a href="https://lynk.id/kyzzcloud">CS Support</a>
+
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <h2>👑 VPS/RDP DIGITALOCEAN 👑</h2>
+
+        <p>🔹 Pilih paket VPS/RDP yang sesuai dengan kebutuhan Anda.</p>
+
+    </section>
+
+    <section class="order-form">
+
+        <h2>🛒 Pesan VPS/RDP</h2>
+
+        <label>👤 Nama Lengkap:</label>
+
+        <input type="text" id="name" placeholder="Masukkan nama lengkap">
+
+        <label>📧 Email:</label>
+
+        <input type="email" id="email" placeholder="Masukkan email">
+
+        <label>📱 Nomor WhatsApp:</label>
+
+        <input type="tel" id="phone" placeholder="Masukkan nomor WhatsApp">
+
+        <label>📦 Pilih Paket VPS/RDP:</label>
+
+        <select id="vpsPackage" onchange="updatePackageDetails()">
+
+            <option value="">-- Pilih Paket --</option>
+
+            <option value="20000">👑 RAM 2GB | 1 Core - Rp 20.000/bulan</option>
+
+            <option value="24000">👑 RAM 4GB | 2 Core - Rp 24.000/bulan</option>
+
+            <option value="28000">👑 RAM 8GB | 2 Core - Rp 28.000/bulan</option>
+
+            <option value="30000">👑 RAM 8GB | 4 Core - Rp 30.000/bulan</option>
+
+            <option value="35000">👑 RAM 16GB | 4 Core - Rp 35.000/bulan</option>
+
+            <option value="50000">👑 RAM 16GB | 8 Core - Rp 50.000/bulan</option>
+
+        </select>
+
+        <div class="package-details">
+
+            <h3>Spesifikasi Paket:</h3>
+
+            <p>💾 RAM: <span id="ram">-</span></p>
+
+            <p>⚙️ CPU: <span id="cpu">-</span></p>
+
+            <p>💽 Disk: <span id="disk">-</span></p>
+
+            <p>🌐 Bandwidth: <span id="bandwidth">-</span></p>
+
+        </div>
+
+        <label>🎟 Kode Promo (opsional):</label>
+
+        <input type="text" id="promoCode" placeholder="Masukkan kode promo" oninput="updatePrice()">
+
+        <p style="font-size: 1.2rem; font-weight: bold; color: #1a1a1a;">💰 Total Harga: <span id="totalPrice" style="color: #0066cc;">Rp 0</span></p>
+
+        <label>💳 Metode Pembayaran:</label>
+
+        <select id="payment">
+
+            <option value="QRIS">QRIS</option>
+
+            <option value="Dana">Dana</option>
+
+            <option value="OVO">OVO</option>
+
+            <option value="GoPay">GoPay</option>
+
+            <option value="Transfer Bank">Transfer Bank</option>
+
+        </select>
+
+        <label>📝 Catatan Tambahan:</label>
+
+        <textarea id="notes" rows="4" placeholder="Sistem operasi yang diinginkan, kebutuhan khusus, dll."></textarea>
+
+        <button onclick="sendOrder()">📱 Pesan via WhatsApp</button>
+
+    </section>
+
+    	<footer>
+
+        <div class="footer-bottom">
+
+            <p>&copy; 2025 KyzzCloud ~ KyzzStore. All Rights Reserved.</p>
+
+        </div>
+
+
+    </footer>
+
+    <script>
+
+        // Package details data
+
+        const packageDetails = {
+
+            "20000": { ram: "2GB", cpu: "1 Core", disk: "80GB SSD", bandwidth: "4TB" },
+
+            "24000": { ram: "4GB", cpu: "2 Core", disk: "80GB SSD", bandwidth: "4TB" },
+
+            "28000": { ram: "8GB", cpu: "2 Core", disk: "120GB SSD", bandwidth: "5TB" },
+
+            "30000": { ram: "8GB", cpu: "4 Core", disk: "120GB SSD", bandwidth: "5TB" },
+
+            "35000": { ram: "16GB", cpu: "4 Core", disk: "320GB SSD", bandwidth: "6TB" },
+
+            "50000": { ram: "16GB", cpu: "8 Core", disk: "320GB SSD", bandwidth: "6TB" }
+
+        };  
+
+        // Toggle mobile menu
+
+        function toggleMenu() {
+
+            const nav = document.getElementById('navMenu');
+
+            nav.classList.toggle('show');
+
+        }
+
+        // Update package details display
+
+        function updatePackageDetails() {
+
+            const packageSelect = document.getElementById('vpsPackage');
+
+            const selectedValue = packageSelect.value;
+
+            if (selectedValue && packageDetails[selectedValue]) {
+
+                const details = packageDetails[selectedValue];
+
+                document.getElementById('ram').textContent = details.ram;
+
+                document.getElementById('cpu').textContent = details.cpu;
+
+                document.getElementById('disk').textContent = details.disk;
+
+                document.getElementById('bandwidth').textContent = details.bandwidth;
+
+                updatePrice();
+
+            } else {
+
+                document.getElementById('ram').textContent = '-';
+
+                document.getElementById('cpu').textContent = '-';
+
+                document.getElementById('disk').textContent = '-';
+
+                document.getElementById('bandwidth').textContent = '-';
+
+                document.getElementById('totalPrice').textContent = 'Rp 0';
+
+            }
+
+        }
+
+        // Update price display
+
+        function updatePrice() {
+
+            const packageSelect = document.getElementById('vpsPackage');
+
+            const promoCode = document.getElementById('promoCode').value;
+
+            let price = packageSelect.value ? parseInt(packageSelect.value) : 0;
+
+            // Apply promo code discount if valid
+
+            if (promoCode === "DISKON10") {
+
+                price = price * 0.9; // 10% discount
+
+                document.getElementById('totalPrice').textContent = `Rp ${Math.round(price)} (Diskon 10%)`;
+
+            } else if (promoCode) {
+
+                document.getElementById('totalPrice').textContent = `Rp ${price} (Kode promo tidak valid)`;
+
+            } else {
+
+                document.getElementById('totalPrice').textContent = `Rp ${price}`;
+
+            }
+
+        }
+
+        // Send order via WhatsApp
+
+        function sendOrder() {
+
+            const name = document.getElementById('name').value;
+
+            const email = document.getElementById('email').value;
+
+            const phone = document.getElementById('phone').value;
+
+            const packageSelect = document.getElementById('vpsPackage');
+
+            const packageName = packageSelect.options[packageSelect.selectedIndex].text;
+
+            const promoCode = document.getElementById('promoCode').value;
+
+            const payment = document.getElementById('payment').value;
+
+            const notes = document.getElementById('notes').value;
+
+            const price = document.getElementById('totalPrice').textContent;
+
+            // Validate required fields
+
+            if (!name || !email || !phone || !packageSelect.value) {
+
+                alert('Harap isi semua field yang wajib diisi!');
+
+                return;
+
+            }
+
+            // Seller WhatsApp number (replace with actual number)
+
+            const sellerPhone = '6282173229551';
+
+            // Create WhatsApp message
+
+            let message = `*PENAWARAN VPS/RDP DIGITALOCEAN*\n\n`
+
+            + `👤 *Data Pemesan:*\n`
+
+            + `   ▸ 📛 Nama: ${name}\n`
+
+            + `   ▸ 📧 Email: ${email}\n`
+
+            + `   ▸ 📱 WhatsApp: ${phone}\n\n`
+
+            + `⚙️ *Spesifikasi:*\n`
+
+            + `   ▸ 🗂️ Paket: ${packageName}\n`
+
+            + `   ▸ 💰 Harga: ${price}\n`
+
+            + `   ▸ 💳 Pembayaran: ${payment}\n`
+
+            + (promoCode ? `   ▸ 🎟️ Kode Promo: ${promoCode}\n` : '')
+
+            + (notes ? `\n📝 *Catatan Khusus:*\n${notes}\n` : '')
+
+            + `\n✅ Saya berminat memesan. Mohon info proses selanjutnya.\n\n`
+
+            + `Terima kasih! 🙏`;
+
+            // Encode message for URL
+
+            const encodedMessage = encodeURIComponent(message);
+
+            // Redirect to WhatsApp
+
+            window.location.href = `https://wa.me/${sellerPhone}?text=${encodedMessage}`;
+
+        }
+
+        // Initialize on page load
+
+        window.onload = function() {
+
+            updatePackageDetails();
+
+        };
+
+    </script>
+
+</body>
+
+</html>

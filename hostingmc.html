@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Viex Cloud - Panel Bot WhatsApp</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>KyzzCloud</h1>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <nav id="navMenu">
+
+            <a href="index.html">Beranda</a>
+
+            <a href="hostingmc.html">Panel Bot</a>
+
+            <a href="vps.html">VPS</a>
+
+            <a href="https://lynk.id/kyzzcloud">CS Support</a>
+
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <h2>[ Panel Bot ]</h2>
+
+        <p>KyzzCloud <strong>|</strong> Dana Limited, Spek Unlimited 🔥</p>
+
+    </section>
+
+    <section class="hosting-types">
+
+        <h2>Pilihan Paket Panel</h2>
+
+        <div class="hosting-container">
+
+            <div class="hosting-box">
+
+                <h3>BASIC</h3>
+
+                <div class="package-list">
+
+                    <div class="package-item" onclick="selectPackage('5000', '1GB', '5GB SSD', '100%')">
+
+                        <p>RAM: 1GB</p>
+
+                        <p>DISK: 5GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 2.000</p>
+
+                    </div>
+
+                    <div class="package-item" onclick="selectPackage('2GB', '4000', '2GB', '8GB SSD', '100%')">
+
+                        <h4>2GB</h4>
+
+                        <p>RAM: 2GB</p>
+
+                        <p>DISK: 8GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 4.000</p>
+
+                    </div>
+
+                    <div class="package-item" onclick="selectPackage('3GB', '6000', '3GB', '11GB SSD', '100%')">
+
+                        <h4>3GB</h4>
+
+                        <p>RAM: 3GB</p>
+
+                        <p>DISK: 11GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 6.000</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+                    <div class="hosting-container">
+
+            <div class="hosting-box">
+
+                <h3>MIDDLE</h3>
+
+                <div class="package-list">
+
+                    <div class="package-item" onclick="selectPackage('4GB', '8000', '4GB', '14GB SSD', '100%')">
+
+                        <h4>4GB</h4>
+
+                        <p>RAM: 4GB</p>
+
+                        <p>DISK: 14GB SSD</p>
+
+                        <p>CPU: 100</p>
+
+                        <p>Harga: Rp 8.000</p>
+
+                    </div>
+
+                    <div class="package-item" onclick="selectPackage('5GB', '10000', '5GB', '17GB SSD', '100%')">
+
+                        <h4>5GB</h4>
+
+                        <p>RAM: 5GB</p>
+
+                        <p>DISK: 17GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 10.000</p>
+
+                    </div>
+
+                    <div class="package-item" onclick="selectPackage('6GB', '12000', '6GB', '20GB SSD', '100%')">
+                      
+                        <h4>6GB</h4>
+
+                        <p>RAM: 6GB</p>
+
+                        <p>DISK: 20GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 11.000</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+  
+              <div class="hosting-box">
+
+                <h3>HIGH</h3>
+
+                <div class="package-list">
+
+                    <div class="package-item" onclick="selectPackage('7GB', '14000', '7GB', '23GB SSD', '100%')">
+
+                        <h4>7GB</h4>
+
+                        <p>RAM: 7GB</p>
+
+                        <p>DISK: 23GB SSD</p>
+
+                        <p>CPU: 100%</p>
+
+                        <p>Harga: Rp 12.000</p>
+
+                    </div>
+
+                    <div class="package-item premium-blink" onclick="selectPackage('Unlimitied', '15000', '∞ GB', '∞ SSD', '∞')">
+                      
+                        <h4>Unlimitied</h4>
+
+                        <p>RAM: ∞</p>
+
+                        <p>DISK: ∞ SSD</p>
+
+                        <p>CPU: ∞ </p>
+
+                        <p>Harga: Rp 13.000</p>
+
+                        <div class="premium-badge">PREMIUM</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="order-form">
+
+        <h2>Ringkasan Pesanan</h2>
+
+        <div class="package-details">
+
+            <h3>Paket Terpilih:</h3>
+
+            <p>Nama: <span id="selectedPackage">-</span></p>
+
+            <p>RAM: <span id="ram">-</span></p>
+
+            <p>Disk: <span id="disk">-</span></p>
+
+            <p>CPU: <span id="cpu">-</span></p>
+
+            <p style="font-size: 1.2rem; font-weight: bold; color: #1a1a1a;">Total Harga: <span id="totalPrice" style="color: #0066cc;">Rp 0</span></p>
+
+        </div>
+
+        <button onclick="sendOrder()">Pesan via WhatsApp</button>
+
+    </section>
+
+    <footer>
+
+        <div class="footer-bottom">
+
+            <p>&copy; 2025 KyzzCloud ~ KyzzStore. All Rights Reserved.</p>
+
+        </div>
+
+    </footer>
+
+    <script>
+
+        // Selected package data
+
+        let selectedPackage = {
+
+            name: '',
+
+            price: '0',
+
+            ram: '',
+
+            disk: '',
+
+            cpu: ''
+
+        };
+
+        // Select package function
+
+        function selectPackage(name, price, ram, disk, cpu) {
+
+            selectedPackage = {
+
+                name: name,
+
+                price: price,
+
+                ram: ram,
+
+                disk: disk,
+
+                cpu: cpu
+
+            };
+
+            // Update display
+
+            document.getElementById('selectedPackage').textContent = name;
+
+            document.getElementById('ram').textContent = ram;
+
+            document.getElementById('disk').textContent = disk;
+
+            document.getElementById('cpu').textContent = cpu;
+
+            document.getElementById('totalPrice').textContent = `Rp ${price}`;
+
+            // Scroll to order summary
+
+            document.querySelector('.order-form').scrollIntoView({ behavior: 'smooth' });
+
+        }
+
+        // Toggle mobile menu
+
+        function toggleMenu() {
+
+            const nav = document.getElementById('navMenu');
+
+            nav.classList.toggle('show');
+
+        }
+
+        // Send order via WhatsApp
+
+        function sendOrder() {
+
+            if (!selectedPackage.name) {
+
+                alert('Silakan pilih paket terlebih dahulu!');
+
+                return;
+
+            }
+
+            // Seller WhatsApp number
+
+            const sellerPhone = '6282173229551';
+
+            // Create WhatsApp message
+
+            let message = `Halo min, saya ingin memesan Panel.\n\n`
+
+            + `*Detail Server:*\n`
+
+            + `   *Paket Hosting:* ${selectedPackage.name}\n`
+
+            + `   *RAM:* ${selectedPackage.ram}\n`
+
+            + `   *Disk:* ${selectedPackage.disk}\n`
+
+            + `   *CPU:* ${selectedPackage.cpu}\n`
+
+            + `   *Harga:* Rp ${selectedPackage.price}\n`
+
+            + `\n*Payment:*\nSaya ingin memesan hosting ini. Tolong Kirim Nomor Pembayaran`;
+
+            // Encode message for URL
+
+            const encodedMessage = encodeURIComponent(message);
+
+            // Redirect to WhatsApp
+
+            window.location.href = `https://wa.me/${sellerPhone}?text=${encodedMessage}`;
+
+        }
+
+        // Initialize on page load
+
+        window.onload = function() {
+
+            // Add animation to package items
+
+            const packageItems = document.querySelectorAll('.package-item');
+
+            packageItems.forEach(item => {
+
+                item.addEventListener('click', function() {
+
+                    // Reset animation
+
+                    this.style.animation = 'none';
+
+                    void this.offsetWidth; // Trigger reflow
+
+                    this.style.animation = 'fadeIn 0.5s ease-out';
+
+                });
+
+            });
+
+        };
+
+    </script>
+
+</body>
+
+</html>
